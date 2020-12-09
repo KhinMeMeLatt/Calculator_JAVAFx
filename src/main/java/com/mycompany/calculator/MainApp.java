@@ -5,6 +5,7 @@ import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
@@ -17,7 +18,9 @@ public class MainApp extends Application {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         
-        stage.setTitle("JavaFX and Maven");
+        Image image = new Image("/icons/Calculator-icon.png");
+        stage.getIcons().add(image);
+        stage.setTitle("Calculator");
         stage.setScene(scene);
         stage.show();
     }
