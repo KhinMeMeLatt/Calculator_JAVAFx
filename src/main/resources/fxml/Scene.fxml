@@ -7,10 +7,14 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="482.0" prefWidth="346.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.calculator.FXMLController">
    <children>
-      <TextField fx:id="resultdisplay" prefHeight="153.0" prefWidth="346.0" style="-fx-border-color: #0288d1; -fx-border-width: 3;" />
+      <TextField fx:id="resultdisplay" disable="true" editable="false" prefHeight="153.0" prefWidth="346.0" style="-fx-border-color: #0288d1; -fx-border-width: 3;">
+         <font>
+            <Font size="33.0" />
+         </font></TextField>
       <Pane layoutY="153.0" prefHeight="329.0" prefWidth="346.0" style="-fx-background-color: #0288d1;">
          <children>
             <GridPane layoutX="14.0" layoutY="15.0" prefHeight="300.0" prefWidth="230.0">
