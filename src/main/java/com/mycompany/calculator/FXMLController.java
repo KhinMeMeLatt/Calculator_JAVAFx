@@ -70,41 +70,90 @@ public class FXMLController implements Initializable {
     double input2;
     int ps;
     int point;
+    boolean restart = true;
+    DecimalFormat td = new DecimalFormat("#.00");
+    
+    public double calculate (double input1, double input2, int ps) {
+        switch(ps) {
+                case 1 : return input1+input2;
+                
+                case 2 : return input1-input2;
+                        
+                case 3 : return input1*input2;
+                   
+                case 4 : return input1/input2;
+                
+                default: return 0;
+            }
+    }
     
     @FXML
     void Calculation(ActionEvent event) {
 
         if(event.getSource() == one) {
+            if(restart || ps != 0) {
+                resultdisplay.setText("");
+            }
             resultdisplay.appendText("1");
         }
         else if(event.getSource() == two) {
+            if(restart || ps != 0) {
+                resultdisplay.setText("");
+            }
             resultdisplay.appendText("2");
         }
         else if(event.getSource() == three) {
+            if(restart || ps != 0) {
+                resultdisplay.setText("");
+            }
             resultdisplay.appendText("3");
         }
         else if(event.getSource() == four) {
+            if(restart || ps != 0) {
+                resultdisplay.setText("");
+            }
             resultdisplay.appendText("4");
         }
         else if(event.getSource() == five) {
+            if(restart || ps != 0) {
+                resultdisplay.setText("");
+            }
             resultdisplay.appendText("5");
         }
         else if(event.getSource() == six) {
+            if(restart || ps != 0) {
+                resultdisplay.setText("");
+            }
             resultdisplay.appendText("6");
         }
         else if(event.getSource() == seven) {
+            if(restart || ps != 0) {
+                resultdisplay.setText("");
+            }
             resultdisplay.appendText("7");
         }
         else if(event.getSource() == eight) {
+            if(restart || ps != 0) {
+                resultdisplay.setText("");
+            }
             resultdisplay.appendText("8");
         }
         else if(event.getSource() == nine) {
+            if(restart || ps != 0) {
+                resultdisplay.setText("");
+            }
             resultdisplay.appendText("9");
         }
         else if(event.getSource() == zero) {
+            if(restart || ps != 0) {
+                resultdisplay.setText("");
+            }
             resultdisplay.appendText("0");
         }
         else if(event.getSource() == dot &&  point == 0) {
+            if(restart) {
+                resultdisplay.setText("");
+            }
             resultdisplay.appendText(".");
             point = 1;
         }
@@ -114,53 +163,74 @@ public class FXMLController implements Initializable {
             input2 = 0;
             ps = 0;
             point = 0;
+            restart = true;
         }
         else if(event.getSource() == plus) {
-            input1 = Double.parseDouble(resultdisplay.getText());
-            
-            resultdisplay.setText("");
+            if(restart) {
+                input1 = Double.parseDouble(resultdisplay.getText());
+            }
+            else {
+                input2 = Double.parseDouble(resultdisplay.getText());
+                result = calculate(input1, input2, ps);
+                resultdisplay.setText(String.valueOf(td.format(result)));
+                input1 = result;
+            }
             ps = 1;
             point = 0;
+            restart = false;
         }
         else if(event.getSource() == minus) {
-            input1 = Double.parseDouble(resultdisplay.getText());
+            if(restart) {
+                input1 = Double.parseDouble(resultdisplay.getText());
+            }
+            else {
+                input2 = Double.parseDouble(resultdisplay.getText());
+                result = calculate(input1, input2, ps);
+                resultdisplay.setText(String.valueOf(td.format(result)));
+                input1 = result;
+            }
             
-            resultdisplay.setText("");
             ps = 2;
             point = 0;
+            restart = false;
         }
         else if(event.getSource() == mul) {
-            input1 = Double.parseDouble(resultdisplay.getText());
+            if(restart) {
+                input1 = Double.parseDouble(resultdisplay.getText());
+            }
+            else {
+                input2 = Double.parseDouble(resultdisplay.getText());
+                result = calculate(input1, input2, ps);
+                resultdisplay.setText(String.valueOf(td.format(result)));
+                input1 = result;
+            }
             
-            resultdisplay.setText("");
             ps = 3;
             point = 0;
+            restart = false;
         }
         else if(event.getSource() == div) {
-            input1 = Double.parseDouble(resultdisplay.getText());
+            if(restart) {
+                input1 = Double.parseDouble(resultdisplay.getText());
+            }
+            else {
+                input2 = Double.parseDouble(resultdisplay.getText());
+                result = calculate(input1, input2, ps);
+                resultdisplay.setText(String.valueOf(td.format(result)));
+                input1 = result;
+            }
             
-            resultdisplay.setText("");
             ps = 4;
             point = 0;
+            restart = false;
         }
         else if(event.getSource() == equal && ps > 0) {
             input2 = Double.parseDouble(resultdisplay.getText());
             
-            DecimalFormat td = new DecimalFormat("#.00");
-            switch(ps) {
-                case 1 : result = input1+input2;
-                        resultdisplay.setText(String.valueOf(td.format(result)));break;
-                
-                case 2 : result = input1-input2;
-                        resultdisplay.setText(String.valueOf(td.format(result)));break;
-                        
-                case 3 : result = input1*input2;
-                        resultdisplay.setText(String.valueOf(td.format(result)));break;
-                   
-                case 4 : result = input1/input2;
-                        resultdisplay.setText(String.valueOf(td.format(result)));break;
-            }
+            resultdisplay.setText(String.valueOf(td.format(calculate(input1, input2, ps))));
+            
             ps = 0;
+            restart = true;
         }
     }
 
